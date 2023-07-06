@@ -1,0 +1,2 @@
+teste = 'abacate'
+abacate = 'teste'

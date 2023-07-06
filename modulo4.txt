@@ -1,0 +1,237 @@
+Higher Order Functions - Funções que podem receber e/ou retornar outras funções
+
+First-Class Functions - Funções que são tratadas como outros tipos de dados comuns (strings, inteiros, etc...)
+
+Dicionarios: (Dictionaries)
+São estrutura de dados do tipo par de chave e valor
+Chaves podem ser consideradas como indice, que vimos na lista e podem ser de tipos imutaveis como: str, int, bool, float,tuple, etc...
+O valor pode ser de qualquer tipo, inclusive um outro dicionario
+Usamos as chaves - {} - ou a classe dict para criar dicionarios 
+Imutaveis: str, int, float,bool, tuple
+Mutavel: dict, list
+pessoa = {
+	'nome' = 'Paulo César'
+	'idade' = 19
+	'altura' = 1,76
+	'endereços' = [
+			{'rua': 'tal tal', 'numero': 123},
+			{'rua': 'outra rua', 'numero': 321},
+		]	
+	}
+ou
+pessoa = dict(nome='Paulo César', idade=19)
+Para se acessar individualmente cada 'chave' do dicionario pode-se utiliza a seguinte sintaxe:
+print(pessoa['nome']) ----- A saída será Paulo César 	
+
+É póssivel adicioanr elementos após a criação dos dicionarios, ex:
+teste = {}
+teste['nome'] = 'jailson'
+
+É póssivel deletar elementos em dicionarios, ex
+del pessoa['nome']
+print(pessoa)
+...
+Não será exibido 'Paulo César'
+
+argumento get(), tenta obter uma chave de um dicionario, por padrão retorna none, ex
+pessoa.get('idade',none)
+ou
+pessoa.get('idade')
+
+muito utilizado para lidar com exceções, ou seja vamos supor que você queira acessar uma chave que não exista, isso acarretaria em um barramento da execução do código, uma maneira de 'driblar' seria utilizar o  try e except, entretanto utilizando o metodo get, fica muito mais simples, exemplo
+if pessoa.get('nome'):
+	print('existe')
+Não será printado o 'existe', pois nos deletamos a chave 'nome' 
+
+Metodos úteis em dicionarios:
+len - informa a quantidade de chaves
+Mais comum utilizar len(nomeDoDicionario) ao inves de nomeDoDicionario.__len__()
+keys - retorna as chaves - nomeDoDicionario.keys()
+values - retorna os valores - nomeDoDicionario.values()
+items - retorna a chave e o valor
+setdefault - adiciona um valor se a chave nao existe
+copy - copia um dicionario. Atenção, se o dicionario tiver apenas tipos imutaveis, como por exemplo o nome, sobrenome... a copia será feita tranquilamente, entretanto se o dicionario possuir por 
+exemplo uma lista dentro, a copia da lista será feita apontando para o mesmo local do dicionario na memoria, ou seja o que for alterado em um será alterado no outro
+copy.deepcopy() - copia profunda, copia todos os elementos, mesmo os tipos mutaveis, sem apontar para o mesmo local da heap, necessario fazer uso da biblioteca copy, 'import copy'
+get - retorna uma chave, retorna none se não existir
+pop - apaga o item com a chave especificada, é póssivel armazer o valor em uma variavel, teste = pessoa.pop('chave')
+popitem - apaga e retorna a ultima chave, exatamente igual ao pop
+update - atualiza ou adiciona novas chaves - nomeDoDicionario.update({
+	'': '',
+	'': '',
+})
+
+Tipo Set - Conjuntos matemateicos
+São mutaveis e so aceitam tipos imutaveis
+Criando um set - teste = set() - criando um set vazio
+ou
+s2 = {'paulo',1,2}
+Os sets nao garantem a ordem dos elementos
+Eficientes em remover valores duplicados
+Eliminam valores duplicados
+É possivel converter uma lista de elementos duplicados em um set, eliminando duplicação
+não aceitam indices
+
+metodos uteis:
+nomeDoSet.add() - adiciona elementos - so aceita um valor por vez
+nomeDoSet.update() - semelhante ao add, entretanto adiciona de forma iteravel, caso se deseje adicionar elementos burlando a forma iteravel basta: nomeDoSet.update(())
+clear - limpa o set
+discard - elimina valor, basta informar o que deseja eliminar
+
+operadores uteis
+s1 = {1,2,3}
+s2={2,3,4}
+Uniao de sets | -> s3 = s1|s2
+Intersecção de sets & -> s3 = s1 & s2
+Diferença de sets - -> s3 = s1 - s2 
+Diferença simetrica de sets ^ -> s3 = s1 ^ s2
+
+Funçao lambda 
+->Função de uma linha
+->Utlizada para resolver problemas simples 
+
+Desempacotamento de dicionarios - (**nomeDoDicionario)
+
+kwargs - Argumentos nomeaveis
+semelhante ao Args 
+metodo de uso - def func (**kwargs)
+- pode ser utilizado para desempacotar ou empacotar dicionarios
+
+List compreenshion 
+Suponhamos esse exemplo de código
+lista[]
+for i in range(10):
+	lista.append(i)
+
+Esse código nada mais nada menos faz com que a lista recebe os elementos de 1 até 10
+Entretanto tem um maneira de fazer isso, diretamente na lista:
+lista [ for numero in range(10)] -> Antes do for é necessário adicionar o que desejamos que tenha na lista, por exemplo se adicionarmos o numero 1 antes do for, o numero 1 aparecerá 10 vezes na lista
+->Outro exemplo: lista[numero * 2 for numero in range(10)] -> Irá dobrar os numeros de 1-10
+
+->Map : A função map em Python recebe dois argumentos: a função que será aplicada a cada elemento e a sequência na qual a função será aplicada
+A função map então itera sobre os elementos da sequência, aplica a função a cada elemento e retorna um objeto do tipo map que contém os resultados.
+
+filter: Em programação, o termo "filter" refere-se a uma função de ordem superior que é usada para filtrar elementos de uma sequência com base em uma determinada condição. 
+ função filter em Python recebe dois argumentos: a função de teste (predicado) que é usada para verificar cada elemento da sequência e a sequência em si. 
+filter(condicional,lista)
+
+isinstance(valor,tipo) -> Verifica se o valor é de um determinado tipo ex
+isinstance(3,int)
+
+Dir -> Vai trazer todos os atributos disponviveis 
+hasattr -> Checa se um determinado metodo existe
+getattr -> obtem um metodo 
+
+#unções que sabem pausar em determinada ocasião
+Iterator é uma classe que tem que ter o metodo iter e next e geralemnte iterator lida com o iteravel 
+Todo generator é um iterator, mas o inverso não se aplcia
+
+Funçao geradora:
+utiliza o yield como forma de retorno
+é possível utilizar outros yield de outras funções utiliazndo o yield from ...
+
+TryExceptElseFinally
+Try -> Tenta executar o código, não pode vir sozinho
+Tomar cuidado com o try e o except pois eles não são boa pratica, devido ao fato de silenciar o erro, então tomar cuidado quando se for utilizar
+É interessante ter o nome do erro que está sendo tratado e utiliza-lo no except por exemplo na divisão por 0, onde o erro está no fato de estar dividindo o numero por zero 
+Finally -> Um bloco que sempre será executado no try except
+é possivel ter quantos except se desejar
+É possível utilizar o else para caso tudo de certo ele executar
+
+Raise
+Utilizado para criar ou utilizar erros, extremamente util
+
+Modulos - Os varios jeitos de se importar um modulo
+Lembrete o nome dos modulos são como nome de variaveis, se criar uma variavel com o mesmo nome do modulo ele será sobrescrito
+
+inteiro - import nome_modulo
+Vantagens: Você tem o nomespace do modulo
+           Não tem diferença para a memoria
+Desvantagens: Nomes grandes
+Ex: import sys - Importa o modulo inteiro do sys
+
+Parcial - from nome_modulo import funções_que_deseja_importar
+Vantagens: Nomes pequeno
+Desvantagens: Perde o acesso ao nomespace
+Ex: from sys import exit, plataform
+
+Apelido - import sys as sy
+Os modulos funcionam como variaveis, essa maneira de se utilizar um modulo é para renomear a variavel
+
+Apelido - from nome_Modulo import nome_Objeto as novo_nome
+Ex: from sys import platform as pt
+
+Tudo - from nome_modulo import*
+É considerada uma má pratica
+Se importa tudo do modulo, todos os nomes
+Ex: from sys import *
+
+É possível importar outros arquivos python, a lógica segue exatamente igual a Java, import nomeArquivo, dessa forma criamos um objeto chamado nomeArquivo e se utilizarmos o'.' teremos
+acesso a todos os metodos do objeto
+
+singleton -> Só pode existir uma instancia daquela coisa no programa inteiro enquanto ela está sendo executada, por exemplo os modulos
+Como recarregar um modulo em python:
+importe o modulo importlib
+chame o metodo importlib.reload(nomeModulo)
+pronto, o modulo será recarregado
+
+variaveis livres e nonlocals
+locals() -> Informa as variaveis locais
+globals() -> Informa as variaveis globais
+utilizando nonlocal nome_da_variavel é possível alterar o valor de variaveis livres
+
+Açucar sintatico:
+utilizando @nome_da_função antes de uma função você indica ao compilador que você usará aquela função
+exemplo
+def soma_decorator(func):
+    def wrapper(x, y):
+        result = func(x, y)
+        return result
+
+    return wrapper
+
+@soma_decorator
+def soma(x, y):
+    return x + y
+
+print(soma(2, 3))
+
+count -> Contador sem fim, é como se fosse um range, mas ele vai até o infinito.
+Para usa-lo é necessário chamar a biblioteca itertools
+from itertools import count 
+count(1,2) -> 1, indica de onde vai começar
+			2 -> Indica de quantos em quantos o numero vai andar 
+c1 - count()
+for i in c1:
+	print(i) esse codigo rodará para sempre
+
+Ambiente Virtual:
+Um ambiente virtual do python carrega uma pasta com toda a instalação no caminho escolhiod
+para criar um ambinete virtual, no terminal digite python -m venv "nome da pasta - geralmente usa-se venv"
+
+pip:
+é comum criarmos um arquivo chamado requirements antes de subir o projeto, pois assim o projeto não fica tão grande
+criamos utilizando a seguinte sintaxe:
+pip freeze > requirements.txt
+pip freeze(ver pacotes)
+
+Arquivos:
+É necessário informar o caminho de onde será criado o arquivo, lembrando que é preciso colocar \\ ao invés de só uma
+readline -> Lê linha por linha, é necessário informar a próxima linha arquivo.readline() -> Exibira a primeira linha
+o operador  'w' apaga tudo e reescreve
+o operador 'a' não apaga tudo e habilita a escrita para o final do darquivo
+
+Json ->
+Importando a biblioteca json, pode-se transferir os arquivos de um codigo para um arquivo.json
+O melhor jeito de transferir dados de um dicionario em python é através dos arquivos json, exemplo do funcionamento no arquivo teste-Json.py
+
+Cuidado ao utilizar parametros mutaveis, por exemplo listas, pois se nao for passado o parametro, o python irá reutilizar o parametro, ou seja mesmo se voce criar uma nova variavel
+a variavel irá ter os atributos de uma variavel ja existente, deve-se ficar atento a isso
+
+A barra sendo utilizada como separador entre os parametros de uma variavel indica que o que vem antes da barra deve ser um valor e o que vem apos pode ser ou um valor ou um arg
+posicionado, por exempl
+def soma(x,y,/,z,w)
+Se tentarmos chamar essa função da seguinte forma:
+soma(x=0,y=0, w= 0, z= 0), daria erro pois x e y nao podem ser variaveis devem ser apenas valores
+
+Tudo que vem após o * indica que o argumento deve ser nominal após o seu uso

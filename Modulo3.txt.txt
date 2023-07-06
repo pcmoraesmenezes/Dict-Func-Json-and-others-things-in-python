@@ -1,0 +1,16 @@
+Para criar funções em python utiliza a nomenclatura
+def NomeDaFunção():
+	---Código---
+para chamar a função
+NomeDaFunção()
+é possivel definir parametros para as funções em python
+def NomeDaFunção(a,b,c):
+	d = a + b + c
+	print(d)
+NomeDaFunção(1,2,3)
+---A saída será 6
+------> A declaração global pode ser usada para definir um x em um unico escopo exemplo
+global x
+x = 10
+print(x)
+->Saída será 10
